@@ -1,0 +1,24 @@
+--create table mvc_board(
+--bId NUMBER(4) PRIMARY KEY,
+--bName VARCHAR2(20),
+--bTitle VARCHAR2(100),
+--bContent VARCHAR2(300),
+--bDate DATE DEFAULT SYSDATE,
+--bHit NUMBER(4) DEFAULT 0,
+--bGroup NUMBER(4),
+--bStep NUMBER(4),
+--bIndent NUMBER(4)
+--);
+--COMMIT;
+--SELECT * FROM mvc_board;
+--create sequence mvc_board_seq;
+--commit;
+--create table member(
+--id varchar2(20) primary key,
+--pw varchar2(20),
+--name varchar2(20),
+--phone varchar2(20)
+--);
+--
+--select * from mvc_board;
+--DROP SEQUENCE mvc_board_seq;
