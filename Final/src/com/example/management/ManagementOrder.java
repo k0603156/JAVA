@@ -3,6 +3,8 @@ package com.example.management;
 import com.example.dao.ODao;
 import com.example.dto.ODto;
 
+import java.sql.SQLException;
+
 public class ManagementOrder extends Management  {
 
     public static void Run() throws Exception {
@@ -61,14 +63,18 @@ public class ManagementOrder extends Management  {
     }
 
     static void saleByCheckPoint (int cust_id, int book_id, ODto oDto){
-        System.out.println("[도서 판매] 구매 Y - 포인트사용?  승인 Y 사용하지 않음 N 취소 as AnyKEY");
-        String InputUsePoint = sc.next();
-        if(InputUsePoint.equals("Y")||InputUsePoint.equals("y")){
-            new ODao(DBm).order(cust_id,book_id,oDto.get_price()-oDto.get_point());
-        }
-        else if(InputUsePoint.equals("N")||InputUsePoint.equals("n")){
-            new ODao(DBm).order(cust_id,book_id,oDto.get_price());
-        }
+            System.out.println("[도서 판매] 구매 Y - 포인트사용?  승인 Y 사용하지 않음 N 취소 as AnyKEY");
+            String InputUsePoint = sc.next();
+            try{
+                    if(InputUsePoint.equals("Y")||InputUsePoint.equals("y")){
+                        new ODao(DBm).order(cust_id,book_id,oDto.get_price()-oDto.get_point());
+                    }
+                    else if(InputUsePoint.equals("N")||InputUsePoint.equals("n")){
+                        new ODao(DBm).order(cust_id,book_id,oDto.get_price());
+                    }
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
         return;
     }
 }

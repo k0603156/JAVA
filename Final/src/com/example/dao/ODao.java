@@ -51,7 +51,7 @@ public class ODao {
         return oDto;
     }
 
-    public void order(int custid, int bookid, int saleprice ){
+    public void order(int custid, int bookid, int saleprice ) throws SQLException {
 
         String query="insert into Orders (custid, bookid, saleprice, orderdate) values (?, ?, ?, ?)";
         String query2="update Book set count=count-1 where bookid=?";
@@ -64,26 +64,32 @@ public class ODao {
             preparedStatement.setInt(3, saleprice);
             preparedStatement.setDate(4, Date.valueOf(java.time.LocalDate.now()));
             preparedStatement.executeUpdate();
+            preparedStatement.close();
 
             preparedStatement2 = connection.prepareStatement(query2);
             preparedStatement2.setInt(1, bookid);
             preparedStatement2.executeUpdate();
-
+            preparedStatement2.close();
 
             connection.commit();
         }
-        catch (MysqlDataTruncation e){
-            System.out.println("재고가 없습니다.");
-            e.printStackTrace();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
+        catch(Exception e){
+                connection.rollback();
+            if(e instanceof SQLException&& ((SQLException) e).getErrorCode()==1690){
+                System.out.println("해당 도서의 재고가 없습니다.");
+            }
+        } finally{
+            try{
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             try {
                 if(preparedStatement != null) preparedStatement.close();
 //                if(connection != null) connection.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+//                e.printStackTrace();
             }
         }
     }
