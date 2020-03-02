@@ -1,14 +1,11 @@
 package com.example.management;
 
-import com.example.DBManager;
 import com.example.dao.BDao;
+import com.example.dto.BDto;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class ManagementBook {
-
-    static Scanner sc = new Scanner(System.in);
-    static DBManager DBm = new DBManager();
+public class ManagementBook extends Management {
 
     public static void Run(){
         BDao bDao = new BDao(DBm);
@@ -22,38 +19,46 @@ public class ManagementBook {
             int sub_action = sc.nextInt();
             switch (sub_action) {
                 case 1:
-                    bDao.list();
+                    List<BDto> bDtoL = bDao.list();
+                    printBookList(bDtoL);
                     break;
                 case 2:
-                    System.out.println("[정보 추가] 도서 제목 입력");
+                    System.out.println("[도서 정보 추가] 도서 제목 입력");
                     String book_name = sc.next();
-
-                    System.out.println("[정보 추가] 도서 츌판사 입력");
+                    System.out.println("[도서 정보 추가] 도서 츌판사 입력");
                     String book_publisher = sc.next();
-
-                    System.out.println("[정보 추가] 도서 가격 입력");
+                    System.out.println("[도서 정보 추가] 도서 가격 입력");
                     int book_price = sc.nextInt();
 
-                    bDao.add(book_name, book_publisher, book_price);
+                    bDao.add(new BDto(book_name, book_publisher, book_price));
                     break;
                 case 3:
-                    System.out.println("[정보 삭제] 도서 번호 입력");
+                    System.out.println("[도서 정보 삭제] 도서 번호 입력");
                     int book_id = sc.nextInt();
 
                     bDao.delete(book_id);
                     break;
                 case 4:
-                    System.out.println("[수량 입고] 도서 번호 입력");
+                    System.out.println("[도서 수량 입고] 도서 번호 입력");
                     int book_id2 = sc.nextInt();
-
-                    System.out.println("[수량 입고] 입고 수량 입력");
+                    System.out.println("[도서 수량 입고] 입고 수량 입력");
                     int book_stock = sc.nextInt();
 
-                    bDao.receiving(book_id2,book_stock);
+                    bDao.receiving(new BDto(book_id2, book_stock));
                     break;
                 case 0:
                     return;
             }
         }
+    }
+    private static void printBookList(List<BDto> bdtoL){
+        bdtoL.forEach(bdto->{
+            System.out.println(
+                    String.format("%-4s",     bdto.get_bookid())
+                            + String.format("%-20s",    bdto.get_bookname())
+                            + String.format("%-15s",    bdto.get_publisher())
+                            + String.format("%-10s",    bdto.get_price())
+                            + String.format("%4s",      bdto.get_count()) );
+        });
     }
 }

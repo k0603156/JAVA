@@ -30,7 +30,11 @@ public class Madang {
                     ManagementCustomer.Run();
                     break;
                 case 3:
-                    ManagementOrder.Run();
+                    try{
+                        ManagementOrder.Run();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                     break;
                 case 0:
                     DBm.closeConnection();

@@ -1,8 +1,12 @@
 package com.example.dao;
 
 import com.example.DBManager;
+import com.example.dto.BDto;
+import com.sun.istack.internal.NotNull;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BDao {
     Connection connection;
@@ -13,24 +17,19 @@ public class BDao {
         connection = DBm.getConnection();
     }
 
-    public void list(){
+    public List<BDto> list(){
+        List<BDto> bDtoL = new ArrayList<BDto>();
         String query="select * from Book";
         try {
-
             preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
-                String bookid       =rs.getString("bookid");
-                String bookname     =rs.getString("bookname");
-                String publisher    =rs.getString("publisher");
-                String price        =rs.getString("price");
-                String count        =rs.getString("count");
-                System.out.println(
-                        String.format("%-4s",     bookid)
-                                + String.format("%-20s",    bookname)
-                                + String.format("%-15s",    publisher)
-                                + String.format("%-10s",    price)
-                                + String.format("%4s",      count) );
+                int     _bookId      =rs.getInt("bookid");
+                String  _bookName    =rs.getString("bookname");
+                String  _publisher   =rs.getString("publisher");
+                int     _price       =rs.getInt("price");
+                int     _count       =rs.getInt("count");
+                bDtoL.add( new BDto(_bookId, _bookName, _publisher, _price, _count));
             }
             if(rs !=null) rs.close();
         } catch (SQLException e) {
@@ -44,15 +43,16 @@ public class BDao {
                 e.printStackTrace();
             }
         }
+        return bDtoL;
     }
 
-    public void add(String bookname, String publisher, int price){
+    public void add(BDto bDto){
         String query="insert into Book (bookname, publisher, price) values ( ?, ?, ?)";
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, bookname);
-            preparedStatement.setString(2, publisher);
-            preparedStatement.setInt(3, price);
+            preparedStatement.setString(1, bDto.get_bookname());
+            preparedStatement.setString(2, bDto.get_publisher());
+            preparedStatement.setInt(3, bDto.get_price());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,12 +85,12 @@ public class BDao {
     }
 
 
-    public void receiving(int bookId, int count){
+    public void receiving(BDto bDto){
         String query="update Book set count=? where bookid=?";
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, count);
-            preparedStatement.setInt(2, bookId);
+            preparedStatement.setInt(1, bDto.get_count());
+            preparedStatement.setInt(2, bDto.get_bookid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

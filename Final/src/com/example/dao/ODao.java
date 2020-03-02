@@ -1,6 +1,8 @@
 package com.example.dao;
 
 import com.example.DBManager;
+import com.example.dto.ODto;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import java.sql.*;
 
@@ -14,35 +16,28 @@ public class ODao {
     }
 
 
-    public void getBookPrice(int custid,int bookid){
-
-
+    public ODto getBookPrice(int custid,int bookid){
+        ODto oDto = null;
         String query ="select b.bookid, b.bookname, b.price, c.name, c.point FROM Book AS b JOIN Customer AS c WHERE c.custid=? AND b.bookid=?";
-//        String query="select * from Book where bookid=?";
+
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, custid);
             preparedStatement.setInt(2, bookid);
             ResultSet rs = preparedStatement.executeQuery();
+
             while(rs.next()){
-                String _point       =rs.getString("point");
-                String _bookid     =rs.getString("bookid");
-                String _bookname    =rs.getString("bookname");
-                String _price        =rs.getString("price");
-                String _name        =rs.getString("name");
-                System.out.println(_name
-                        +"님의 포인트는 "
-                        +_point
-                        +"Point 이며 "
-                        +_bookid
-                        +"번 "
-                        +_bookname
-                        +"의 가격은 "
-                        +_price
-                        +"원 입니다."  );
-                System.out.println("포인트 차감시 "+ (Integer.parseInt(_price) - Integer.parseInt((_point))+"원으로 구매 가능합니다."));
+                int     _bookid    =rs.getInt("bookid");
+                String  _bookname  =rs.getString("bookname");
+                int     _price     =rs.getInt("price");
+                String  _name      =rs.getString("name");
+                int     _point     =rs.getInt("point");
+
+
+                oDto = new ODto(_bookid, _bookname,_price,_name, _point);
             }
             if(rs !=null) rs.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -53,6 +48,7 @@ public class ODao {
                 e.printStackTrace();
             }
         }
+        return oDto;
     }
 
     public void order(int custid, int bookid, int saleprice ){
@@ -75,7 +71,12 @@ public class ODao {
 
 
             connection.commit();
-        } catch (SQLException e) {
+        }
+        catch (MysqlDataTruncation e){
+            System.out.println("재고가 없습니다.");
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
