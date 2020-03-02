@@ -6,7 +6,7 @@ public class DBManager {
     private final String JDBC   = "com.mysql.cj.jdbc.Driver";
     private final String URL    = "jdbc:mysql://localhost/madang?&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false";
     private final String USER   = "dev";
-    private final String PASS   = "{kimyongkukdevsqlpw}";
+    private final String PASS   = "";
     private Connection conn = null;
 
     public DBManager(){
