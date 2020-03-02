@@ -20,8 +20,6 @@ public class CDao {
         connection = DBm.getConnection();
     }
 
-
-
     public List<CDto> list(){
         List<CDto> cDtoL = new ArrayList<CDto>();
         String query="select * from Customer";
@@ -30,12 +28,12 @@ public class CDao {
             preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
-                int    custid       =rs.getInt("custid");
-                String name         =rs.getString("name");
-                String address      =rs.getString("address");
-                String phone        =rs.getString("phone");
-                int point           =rs.getInt("point");
-                cDtoL.add(new CDto(custid,name,address,phone,point));
+                int     _custid       =rs.getInt(   "custid");
+                String  _name         =rs.getString("name");
+                String  _address      =rs.getString("address");
+                String  _phone        =rs.getString("phone");
+                int     _point        =rs.getInt(   "point");
+                cDtoL.add(new CDto(_custid,_name,_address,_phone,_point));
             }
             if(rs !=null) rs.close();
         } catch (SQLException e) {

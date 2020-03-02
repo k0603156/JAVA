@@ -1,10 +1,13 @@
 package com.example.dao;
 
 import com.example.DBManager;
+import com.example.dto.CDto;
 import com.example.dto.ODto;
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ODao {
     Connection connection;
@@ -13,6 +16,36 @@ public class ODao {
 
     public ODao(DBManager DBm){
         connection = DBm.getConnection();
+    }
+
+    public List<ODto> list(){
+        List<ODto> oDtoL = new ArrayList<ODto>();
+        String query="select o.*, c.name FROM Orders AS o JOIN Customer AS c ON o.custid = c.custid";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                int     _orderid    =rs.getInt("orderid");
+                int     _custid     =rs.getInt("custid");
+                String  _name       =rs.getString("name");
+                int     _bookid     =rs.getInt("bookid");
+                int     _saleprice  =rs.getInt("saleprice");
+                String  _orderdate  =rs.getString("orderdate");
+                oDtoL.add(new ODto(_orderid,_custid,_name,_bookid,_saleprice,_orderdate));
+            }
+            if(rs !=null) rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+
+                if(preparedStatement != null) preparedStatement.close();
+//                if(connection != null) connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return oDtoL;
     }
 
 
@@ -32,8 +65,6 @@ public class ODao {
                 int     _price     =rs.getInt("price");
                 String  _name      =rs.getString("name");
                 int     _point     =rs.getInt("point");
-
-
                 oDto = new ODto(_bookid, _bookname,_price,_name, _point);
             }
             if(rs !=null) rs.close();
@@ -54,7 +85,7 @@ public class ODao {
     public void order(int custid, int bookid, int saleprice ) throws SQLException {
 
         String query="insert into Orders (custid, bookid, saleprice, orderdate) values (?, ?, ?, ?)";
-        String query2="update Book set count=count-1 where bookid=?";
+        String query2="update Book set stock=stock-1 where bookid=?";
         try {
             connection.setAutoCommit(false);
 

@@ -6,9 +6,9 @@ import com.example.dto.BDto;
 import java.util.List;
 
 public class ManagementBook extends Management {
+    BDao bDao = new BDao(DBm);
+    public void Run(){
 
-    public static void Run(){
-        BDao bDao = new BDao(DBm);
         while(true){
             System.out.println("[도서관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 도서 목록 보기");
@@ -58,7 +58,8 @@ public class ManagementBook extends Management {
                             + String.format("%-20s",    bdto.get_bookname())
                             + String.format("%-15s",    bdto.get_publisher())
                             + String.format("%-10s",    bdto.get_price())
-                            + String.format("%4s",      bdto.get_count()) );
+                            + String.format("%4s",      bdto.get_stock()) );
         });
     }
+
 }

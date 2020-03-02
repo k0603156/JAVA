@@ -5,23 +5,23 @@ public class BDto {
     String  _bookname;
     String  _publisher;
     int     _price;
-    int     _count;
+    int     _stock;
 
-    public BDto(int _bookid, String _bookname, String _publisher, int _price, int _count){
+    public BDto(int _bookid, String _bookname, String _publisher, int _price, int _stock){
         this._bookid=_bookid;
         this._bookname=_bookname;
         this._publisher=_publisher;
         this._price=_price;
-        this._count=_count;
+        this._stock=_stock;
     }
     public BDto(String _bookname, String _publisher, int _price){
         this._bookname=_bookname;
         this._publisher=_publisher;
         this._price=_price;
     }
-    public BDto(int _bookid, int _count){
+    public BDto(int _bookid, int _stock){
         this._bookid=_bookid;
-        this._count=_count;
+        this._stock=_stock;
     }
     public int get_bookid() {
         return _bookid;
@@ -39,7 +39,7 @@ public class BDto {
         return _price;
     }
 
-    public int get_count() {
-        return _count;
+    public int get_stock() {
+        return _stock;
     }
 }

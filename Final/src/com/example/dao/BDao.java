@@ -28,8 +28,8 @@ public class BDao {
                 String  _bookName    =rs.getString("bookname");
                 String  _publisher   =rs.getString("publisher");
                 int     _price       =rs.getInt("price");
-                int     _count       =rs.getInt("count");
-                bDtoL.add( new BDto(_bookId, _bookName, _publisher, _price, _count));
+                int     _stock       =rs.getInt("stock");
+                bDtoL.add( new BDto(_bookId, _bookName, _publisher, _price, _stock));
             }
             if(rs !=null) rs.close();
         } catch (SQLException e) {
@@ -86,10 +86,10 @@ public class BDao {
 
 
     public void receiving(BDto bDto){
-        String query="update Book set count=? where bookid=?";
+        String query="update Book set stock=? where bookid=?";
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, bDto.get_count());
+            preparedStatement.setInt(1, bDto.get_stock());
             preparedStatement.setInt(2, bDto.get_bookid());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

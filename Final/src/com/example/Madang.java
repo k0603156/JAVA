@@ -24,14 +24,14 @@ public class Madang {
 
             switch (action){
                 case 1:
-                    ManagementBook.Run();
+                    new ManagementBook().Run();
                     break;
                 case 2:
-                    ManagementCustomer.Run();
+                    new ManagementCustomer().Run();
                     break;
                 case 3:
                     try{
-                        ManagementOrder.Run();
+                        new ManagementOrder().Run();
                     }catch(Exception e){
                         System.out.println(e.getMessage());
                     }

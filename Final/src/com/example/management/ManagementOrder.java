@@ -4,15 +4,16 @@ import com.example.dao.ODao;
 import com.example.dto.ODto;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ManagementOrder extends Management  {
+    ODao oDao = new ODao(DBm);
+    public void Run() throws Exception {
 
-    public static void Run() throws Exception {
-        ODao oDao = new ODao(DBm);
         while(true) {
             System.out.println("[판매관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 도서 판매");
-            System.out.println("[2] 판매금액 관리");
+            System.out.println("[2] 판매 기록");
             System.out.println("[0] 뒤로");
             int sub_action = sc.nextInt();
             switch (sub_action) {
@@ -28,7 +29,6 @@ public class ManagementOrder extends Management  {
 
                     printPriceByCustomer(oDto);
 
-
                     System.out.println("[도서 판매] 구매? 승인 Y / 취소 as AnyKEY");
                     String InputBuyCheck = sc.next();
 
@@ -39,13 +39,18 @@ public class ManagementOrder extends Management  {
                         break;
                     }
                     break;
+                case 2:
+                    System.out.println("[도서 판매 기록]");
+                    List<ODto> oDtoL = oDao.list();
+                    printSaleRecord(oDtoL);
+                    break;
                 case 0:
                     return;
             }
         }
     }
 
-    static void printPriceByCustomer(ODto oDto){
+     void printPriceByCustomer(ODto oDto){
 
         System.out.println(oDto.get_name()
                 +"님의 포인트는 "
@@ -61,16 +66,30 @@ public class ManagementOrder extends Management  {
                 + (oDto.get_price() - oDto.get_point())
                 +"원으로 구매 가능합니다.");
     }
-
-    static void saleByCheckPoint (int cust_id, int book_id, ODto oDto){
+     void printSaleRecord(List<ODto> oDtoL){
+        oDtoL.forEach(oDto -> {
+            System.out.println("["+oDto.get_orderid()
+                    +"]"
+                    +oDto.get_custid()
+                    +"번 "
+                    +oDto.get_name()
+                    +"님 "
+                    +oDto.get_bookid()
+                    +"번 도서 "
+                    +oDto.get_saleprice()
+                    +"원에 판매 | "
+                    +oDto.get_orderdate()+" |");
+        });
+    }
+     void saleByCheckPoint (int cust_id, int book_id, ODto oDto){
             System.out.println("[도서 판매] 구매 Y - 포인트사용?  승인 Y 사용하지 않음 N 취소 as AnyKEY");
             String InputUsePoint = sc.next();
             try{
                     if(InputUsePoint.equals("Y")||InputUsePoint.equals("y")){
-                        new ODao(DBm).order(cust_id,book_id,oDto.get_price()-oDto.get_point());
+                        oDao.order(cust_id,book_id,oDto.get_price()-oDto.get_point());
                     }
                     else if(InputUsePoint.equals("N")||InputUsePoint.equals("n")){
-                        new ODao(DBm).order(cust_id,book_id,oDto.get_price());
+                        oDao.order(cust_id,book_id,oDto.get_price());
                     }
                 }catch(SQLException e){
                     e.printStackTrace();

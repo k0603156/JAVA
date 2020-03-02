@@ -1,15 +1,14 @@
 package com.example.management;
 
 import com.example.dao.CDao;
-import com.example.dto.BDto;
 import com.example.dto.CDto;
 
 import java.util.List;
 
 public class ManagementCustomer extends Management  {
+    CDao cDao = new CDao(DBm);
+    public void Run(){
 
-    public static void Run(){
-        CDao cDao = new CDao(DBm);
         while(true){
             System.out.println("[고객관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 고객 정보 리스트");
@@ -53,7 +52,7 @@ public class ManagementCustomer extends Management  {
         }
     }
 
-    private static void printCustomerList(List<CDto> cdtoL){
+    private void printCustomerList(List<CDto> cdtoL){
         cdtoL.forEach(cdto->{
             System.out.println(
                     String.format("%-4s",     cdto.get_custid())
