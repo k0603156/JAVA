@@ -11,7 +11,7 @@ public class ManagementBook extends Management {
     BDao bDao = new BDao(DBm);
     public void Run(){
         int action =10;
-        try{
+
         while(true){
             System.out.println("[도서관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 도서 목록 보기");
@@ -20,7 +20,12 @@ public class ManagementBook extends Management {
             System.out.println("[4] 도서 입고");
             System.out.println("[0] 뒤로");
 
-            action = sc.nextInt();
+            try{
+                 action = sc.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("명령 리스트에 존재하는 정수를 입력해주세요");
+                sc = new Scanner(System.in);
+            }
 
             switch (action) {
                 case 1:
@@ -59,13 +64,8 @@ public class ManagementBook extends Management {
 
             }
         }
-        } catch (Exception e){
-            if(e instanceof InputMismatchException) {
-                System.out.println("명령 리스트에 존재하는 정수를 입력해주세요");
-                sc = new Scanner(System.in);
-            }else System.out.println(e.getMessage());
-        }
     }
+
     private static void printBookList(List<BDto> bdtoL){
         bdtoL.forEach(bdto->{
             System.out.println(

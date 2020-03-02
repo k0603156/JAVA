@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.management.Management;
 import com.example.management.ManagementBook;
 import com.example.management.ManagementCustomer;
 import com.example.management.ManagementOrder;
@@ -7,25 +8,19 @@ import com.example.management.ManagementOrder;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Madang {
-    static Scanner sc = new Scanner(System.in);
-    static DBManager DBm = new DBManager();
+public class Madang extends Management {
     public static void main (String[] args){
         int action=10;
         MainLoop:
-
+        try{
         while(true){
             System.out.println("[Main] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 도서 관리");
             System.out.println("[2] 고객 관리");
             System.out.println("[3] 판매 관리");
             System.out.println("[0] 종료");
-            try{
-                action = sc.nextInt();
-            } catch (Exception e){
-                if(e instanceof InputMismatchException)
-                    sc = new Scanner(System.in);
-                }
+            action = sc.nextInt();
+
                 switch (action){
                     case 1:
                         new ManagementBook().Run();
@@ -45,6 +40,11 @@ public class Madang {
                 }
 
 
+        }
+        } catch (Exception e){
+            if(e instanceof InputMismatchException)
+                System.out.println("명령 리스트에 존재하는 정수를 입력해주세요");
+                sc = new Scanner(System.in);
         }
 
         System.out.println("종료 됩니다.");
