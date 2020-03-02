@@ -1,14 +1,18 @@
 package com.example.management;
 
+import com.example.command.CAddCommand;
+import com.example.command.CListCommand;
+import com.example.command.CModifyCommand;
 import com.example.dao.CDao;
-import com.example.dto.CDto;
 
-import java.util.List;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class ManagementCustomer extends Management  {
     CDao cDao = new CDao(DBm);
     public void Run(){
-
+        int action =10;
+        try{
         while(true){
             System.out.println("[고객관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 고객 정보 리스트");
@@ -16,52 +20,35 @@ public class ManagementCustomer extends Management  {
             System.out.println("[3] 고객 정보   수정");
             System.out.println("[4] 고객 포인트 관리");
             System.out.println("[0] 뒤로");
-            int sub_action = sc.nextInt();
-            switch (sub_action) {
+            action = sc.nextInt();
+            switch (action) {
                 case 1:
-                    List<CDto> cdtoL = cDao.list();
-                    printCustomerList(cdtoL);
+                    new CListCommand(cDao).execute();
                     break;
                 case 2:
-                    System.out.println("[고객 정보 추가] 고객 이름 입력");
-                    String name = sc.next();
-                    System.out.println("[고객 정보 추가] 고객 주소 입력");
-                    String address = sc.next();
-                    System.out.println("[고객 정보 추가] 고객 핸드폰 번호 입력");
-                    String phone = sc.next();
-
-                    cDao.add(new CDto(name, address, phone));
+                    new CAddCommand(cDao).execute();
                     break;
                 case 3:
-
-                    System.out.println("[고객 정보 수정] 고객 번호 입력");
-                    int custId = sc.nextInt();
-                    System.out.println("[고객 정보 수정] 고객 주소 입력");
-                    String address2 = sc.next();
-                    System.out.println("[고객 정보 수정] 고객 핸드폰 번호 입력");
-                    String phone2 = sc.next();
-
-                    cDao.update(new CDto(custId, address2, phone2));
+                    new CModifyCommand(cDao).execute();
                     break;
                 case 4:
-                    System.out.println("[고객 포인트 관리] 고객 포인트 관리");
+                    System.out.println("[고객 포인트 관리] 고객 포인트 관리 미구현");
                     break;
                 case 0:
                     return;
+                default:
+                    System.out.println("잘못된 입력입니다.");
+                    break;
             }
+        }
+        } catch (Exception e){
+            if(e instanceof InputMismatchException) {
+                System.out.println("명령 리스트에 존재하는 정수를 입력해주세요");
+                sc = new Scanner(System.in);
+            }else System.out.println(e.getMessage());
         }
     }
 
-    private void printCustomerList(List<CDto> cdtoL){
-        cdtoL.forEach(cdto->{
-            System.out.println(
-                    String.format("%-4s",     cdto.get_custid())
-                            + String.format("%-20s",    cdto.get_name())
-                            + String.format("%-15s",    cdto.get_address())
-                            + String.format("%-10s",    cdto.get_phone())
-                            + String.format("%4s",      cdto.get_point()) );
-        });
-    }
 }
 
 

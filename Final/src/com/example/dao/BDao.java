@@ -2,7 +2,6 @@ package com.example.dao;
 
 import com.example.DBManager;
 import com.example.dto.BDto;
-import com.sun.istack.internal.NotNull;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.List;
 public class BDao {
     Connection connection;
     PreparedStatement preparedStatement;
-    PreparedStatement preparedStatement2;
 
     public BDao(DBManager DBm){
         connection = DBm.getConnection();

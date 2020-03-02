@@ -3,12 +3,15 @@ package com.example.management;
 import com.example.dao.BDao;
 import com.example.dto.BDto;
 
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class ManagementBook extends Management {
     BDao bDao = new BDao(DBm);
     public void Run(){
-
+        int action =10;
+        try{
         while(true){
             System.out.println("[도서관리] 실행하실 명령 번호를 입력하세요.");
             System.out.println("[1] 도서 목록 보기");
@@ -16,8 +19,10 @@ public class ManagementBook extends Management {
             System.out.println("[3] 도서 정보 삭제");
             System.out.println("[4] 도서 입고");
             System.out.println("[0] 뒤로");
-            int sub_action = sc.nextInt();
-            switch (sub_action) {
+
+            action = sc.nextInt();
+
+            switch (action) {
                 case 1:
                     List<BDto> bDtoL = bDao.list();
                     printBookList(bDtoL);
@@ -48,7 +53,17 @@ public class ManagementBook extends Management {
                     break;
                 case 0:
                     return;
+                default:
+                    System.out.println("잘못된 입력입니다.");
+                    break;
+
             }
+        }
+        } catch (Exception e){
+            if(e instanceof InputMismatchException) {
+                System.out.println("명령 리스트에 존재하는 정수를 입력해주세요");
+                sc = new Scanner(System.in);
+            }else System.out.println(e.getMessage());
         }
     }
     private static void printBookList(List<BDto> bdtoL){

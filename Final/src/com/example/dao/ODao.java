@@ -1,9 +1,7 @@
 package com.example.dao;
 
 import com.example.DBManager;
-import com.example.dto.CDto;
 import com.example.dto.ODto;
-import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -82,7 +80,7 @@ public class ODao {
         return oDto;
     }
 
-    public void order(int custid, int bookid, int saleprice ) throws SQLException {
+    public void sale(int custid, int bookid, int saleprice ) throws SQLException {
 
         String query="insert into Orders (custid, bookid, saleprice, orderdate) values (?, ?, ?, ?)";
         String query2="update Book set stock=stock-1 where bookid=?";

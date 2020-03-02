@@ -1,7 +1,6 @@
 package com.example.dao;
 
 import com.example.DBManager;
-import com.example.dto.BDto;
 import com.example.dto.CDto;
 
 import java.sql.Connection;
@@ -14,7 +13,6 @@ import java.util.List;
 public class CDao {
     Connection connection;
     PreparedStatement preparedStatement;
-    PreparedStatement preparedStatement2;
 
     public CDao(DBManager DBm){
         connection = DBm.getConnection();
@@ -69,7 +67,7 @@ public class CDao {
             }
         }
     }
-    public void update(CDto cDto){
+    public void modify(CDto cDto){
 
         String query="update Customer SET address=?, phone=? WHERE custid=?" ;
         try {
