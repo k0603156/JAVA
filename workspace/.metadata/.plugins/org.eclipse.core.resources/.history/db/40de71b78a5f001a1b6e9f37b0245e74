@@ -1,0 +1,46 @@
+package ctrl;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FrontController extends HttpServlet{
+	
+	public FrontController () {}
+	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uri = req.getRequestURI();
+		System.out.println("uri:" +uri);
+		
+		String contextPath = req.getContextPath();
+		System.out.println("context:" +contextPath);
+		
+		String path = uri.substring(contextPath.length());
+		System.out.println(path);
+		
+		String targetPage= "";
+		
+		if(path.equals("test.do")) {
+			String name = req.getParameter("name");
+			System.out.println("name:" +name);
+			targetPage = "/testReturn.jsp";
+		}
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher(targetPage);
+		requestDispatcher.forward(req, resp);
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		service(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		service(req, resp);
+	}
+}
