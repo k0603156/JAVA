@@ -1,6 +1,8 @@
-*.java          text diff=java
+SERVLET/workspace/.metadata/.plugins/* linguist-vendored
 
-*.jsp           text
+*/*.java          text diff=java
 
-*.jar           binary
-*.class         binary
+*/*.jsp           text
+
+*/*.jar           binary
+*/*.class         binary
