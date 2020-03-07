@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManagementBook extends Management {
+    static int MB =1024*1024;
     BDao bDao = new BDao(DBm);
     public void Run(){
         int action =10;
@@ -19,7 +20,6 @@ public class ManagementBook extends Management {
             System.out.println("[3] 도서 정보 삭제");
             System.out.println("[4] 도서 입고");
             System.out.println("[0] 뒤로");
-
             try{
                  action = sc.nextInt();
             } catch (InputMismatchException e){
@@ -75,6 +75,8 @@ public class ManagementBook extends Management {
                             + String.format("%-10s",    bdto.get_price())
                             + String.format("%4s",      bdto.get_stock()) );
         });
+        System.out.println((Runtime.getRuntime().totalMemory() -Runtime.getRuntime().freeMemory())/MB);
     }
+
 
 }
