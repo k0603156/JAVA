@@ -1,1 +1,6 @@
-SERVLET/*/*/WebContent/WEB-INF/lib/* linguist-vendored
+*.java          text diff=java
+
+*.jsp           text
+
+*.jar           binary
+*.class         binary
