@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here2</title>
+</head>
+<body>
+	<!-- <h1>Index.jsp</h1> -->
+	<!-- <span><a href="http://www.naver.com">naver</a></span> -->
+	<!-- <span><a href="./test.do?my_name=kim">for Send Your Name. Click!</a></span> -->
+	<form action="">
+		<table>
+			<tr>
+				<td><label>제목</label></td>
+				<td>
+			<input name="title" type="text" placeholder="제목을 입력하세요." />
+				</td>
+				</tr>
+			<tr>
+				<td><label>글쓴이</label></td>
+				<td>
+			<input name="author" type="text" placeholder="제목을 입력하세요." />
+				</td>
+				</tr>
+			<tr>
+				<td><label>내용<label></td>
+				<td><input name="body" type="text" placeholder="제목을 입력하세요." /></td>
+			</tr>
+			<tr>
+			<td> <input type="submit" value="글 작성"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
