@@ -1,7 +1,11 @@
+http://naver.me/xxXS30Ic
+
+1234
+
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="30">
 	<Properties>
-		<Property name="baseDir">C:/_jsp/logs/StartBoard</Property>
+		<Property name="baseDir"></Property>
 	</Properties>
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">

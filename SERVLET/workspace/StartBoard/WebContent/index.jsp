@@ -4,40 +4,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here2</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<!-- <h1>Index.jsp</h1> -->
-	<!-- <span><a href="http://www.naver.com">naver</a></span> -->
-	<!-- <span><a href="./test.do?my_name=kim">for Send Your Name. Click!</a></span> -->
-	<form action="./writeSave.do" method="POST">
-		<table>
-			<tr>
-				<td colspan="2">글쓰기
-			</tr>
-			<tr>
-				<td><label>제목</label></td>
-				<td><input name="title" type="text" placeholder="제목을 입력하세요." required/>
-				</td>
-			</tr>
-			<tr>
-				<td><label>글쓴이</label></td>
-				<td><input name="author" type="text" placeholder="글쓴이를 입력하세요." required/>
-				</td>
-			</tr>
-			<tr>
-				<td><label>내용</label></td>
-				<td><textarea name="content" cols="40" rows="5" placeholder="내용을 입력하세요."  ></textarea></td>
-			</tr>
-			<tr>
-				<td><label>이메일</label></td>
-				<td><input name="email" type="email" placeholder="이메일을 입력하세요." /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="글 작성" />&nbsp; <input
-					type="reset" value="지우기" /></td>
-			</tr>
-		</table>
+	<!-- <h1>Index.jsp</h1>
+	<h1><a href="http://www.naver.com">Naver.com</a></h1>
+	<h1><a href="./test.do?myName=Kimyongkuk">이름을 알려주세요~!~!</a></h1> -->
+	<form action="./writeSave.do" method="post">
+	<table border="1">
+		<tr>
+		<td colspan="2" style="text-align: center;">연습용 게시판 글쓰기</td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" placeholder="제목을 입력하세요!" name="title" required></td>
+		</tr>
+		<tr>
+			<td>글쓴이</td>
+			<td><input type="text" placeholder="글쓴이를 입력하세요!" name="author" required></td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><textarea cols="40" rows="5" name="content"></textarea></td>
+		</tr>
+		<tr>
+			<td>연락처</td>
+			<td><input type="email" placeholder="이메일을 입력하세요!" name="email"></td>
+		</tr>
+		<tr>
+		<td colspan="2" style="text-align: center;">
+			<input type="submit" value="글작성 완료">&nbsp;
+			<input type="reset" value="다시작성">
+		</td>
+		</tr>
+	</table>
 	</form>
+	<a href="./list.do">[ -List-> ]</a>
 </body>
 </html>
