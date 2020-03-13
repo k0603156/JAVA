@@ -1,0 +1,31 @@
+package service;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ctrl.FrontController;
+import model.BoardDAO;
+import model.BoardDTO;
+
+public class ListAction implements Action{
+	private static Logger log = LoggerFactory.getLogger(ListAction.class);
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) {
+		BoardDAO bdao = new BoardDAO();
+		/*ArrayList<BoardDTO> bList = new ArrayList<>();
+		bList = bdao.getList();*/			
+		ArrayList<BoardDTO> bList = (ArrayList<BoardDTO>)bdao.getList();
+		
+		if (bList == null) {
+			log.info("Getting Data Fail From DB");
+		}
+		req.setAttribute("bList", bList);
+		
+	}
+
+}

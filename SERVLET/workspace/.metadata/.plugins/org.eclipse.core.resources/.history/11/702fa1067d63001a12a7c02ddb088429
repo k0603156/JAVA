@@ -1,0 +1,16 @@
+package service;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DeleteAction implements Action {
+
+	@Override
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

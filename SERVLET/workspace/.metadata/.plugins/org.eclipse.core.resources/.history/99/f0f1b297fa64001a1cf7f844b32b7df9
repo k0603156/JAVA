@@ -1,0 +1,4 @@
+/** Your theme modifications here **/
+#top #regist-modal .modal-header {
+    background: #4fbfa8;
+}

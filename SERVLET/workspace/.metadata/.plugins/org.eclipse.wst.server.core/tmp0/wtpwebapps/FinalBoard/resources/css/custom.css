@@ -1,0 +1,7 @@
+/** Your theme modifications here **/
+#top #register-modal .modal-header {
+    background: #4fbfa8;
+}
+#top #register-modal .modal-header h4 {
+    color: #fff;
+}
