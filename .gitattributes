@@ -1,4 +1,5 @@
 SERVLET/workspace/.metadata/.plugins/* linguist-vendored
+SERVLET/workspace/FinalBoard/WebContent/resources/* linguist-vendored
 
 */*.java          text diff=java
 
