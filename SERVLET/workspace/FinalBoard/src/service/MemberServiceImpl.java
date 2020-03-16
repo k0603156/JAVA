@@ -2,6 +2,7 @@ package service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,23 +15,62 @@ public class MemberServiceImpl implements MemberService {
 
 	private static Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
 	MemberDAO mdao;
+
 	public MemberServiceImpl() {
 		mdao = new MemberDAOImpl();
 	}
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String email =request.getParameter("email");
-		String password = request.getParameter("password");
-		String nickname = request.getParameter("nickname");
-		MemberDTO mdto = new MemberDTO(email, password, nickname);
+	public void execute(HttpServletRequest request, HttpServletResponse response, String action) {
+		if (action.equals("signup")) {
+			String email = request.getParameter("email");
+			String nickname = request.getParameter("nickname");
+			String pwd = request.getParameter("pwd");
+			MemberDTO mdto = new MemberDTO(email, nickname, pwd);
+
+			boolean flag = regist(mdto);
+			if (flag) {
+				log.info("regist success");
+			} else {
+				log.info("regist fail");
+			}
+		} else if (action.equals("signin")) {
+			String email = request.getParameter("email");
+			String pwd = request.getParameter("pwd");
+			MemberDTO mdto = new MemberDTO(email, pwd);
+			MemberDTO logindto = login(mdto);
+			if (logindto != null) {
+				log.info("login success");
+				HttpSession session = request.getSession();
+				session.setAttribute("email", logindto.getEmail());
+				session.setAttribute("nickname", logindto.getNickname());
+				session.setAttribute("grade", logindto.getGrade());
+				session.setMaxInactiveInterval(5*60);
+			} else {
+				log.info("login fail");
+			}
+		}
 	}
-	
+
 	@Override
 	public boolean regist(MemberDTO mdto) {
 		boolean flag = mdao.insert(mdto);
-		
-		if(flag) return true; else return false;
+
+		if (flag)
+			return true;
+		else
+			return false;
+	}
+
+	@Override
+	public MemberDTO login(MemberDTO mdto) {
+		MemberDTO logindto = mdao.login(mdto);
+
+		if (logindto != null)
+			return logindto;
+		else
+			return null;
+
 	}
 
 }

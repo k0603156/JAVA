@@ -8,15 +8,20 @@ public class MemberDTO {
 	private static Logger log = LoggerFactory.getLogger(MemberDTO.class);
 	private String email;
 	private String nickname;
-	private String password;
+	private String pwd;
 	private int grade;
 	
 	public MemberDTO(){}
-	public MemberDTO(String email, String nickname, String password) {
+	public MemberDTO(String email, String pwd) {
+		super();
+		this.email = email;
+		this.pwd = pwd;
+	}
+	public MemberDTO(String email, String nickname, String pwd) {
 		super();
 		this.email = email;
 		this.nickname = nickname;
-		this.password = password;
+		this.pwd = pwd;
 	}
 	
 	public String getEmail() {
@@ -31,11 +36,11 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public int getGrade() {
 		return grade;

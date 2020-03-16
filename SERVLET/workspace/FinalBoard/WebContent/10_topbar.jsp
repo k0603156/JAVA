@@ -31,12 +31,13 @@
                         <h4 class="modal-title" id="Login">Customer SignIn</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
+                        <form action="./member" method="post">
+                           	<input type="hidden" class="form-control" value="signin" name="action" >
                             <div class="form-group">
                                 <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="password">
+                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="pwd">
                             </div>
 
                             <p class="text-center">
@@ -58,7 +59,8 @@
                         <h4 class="modal-title" id="Regist">Customer registration</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="./member/test" method="post">
+                        <form action="./member" method="post">
+                          	<input type="hidden" class="form-control" value="signup" name="action" >
                             <div class="form-group">
                                 <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
                             </div>         
@@ -66,7 +68,7 @@
                                 <input type="text" class="form-control" id="nickname-modal" placeholder="nickname" name="nickname">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="password">
+                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="pwd">
                             </div>
 
                             <p class="text-center">

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import persistence.MemberDTO;
 
 public interface MemberService {
-	void execute(HttpServletRequest request, HttpServletResponse response);
 	boolean regist(MemberDTO mdto);
+	MemberDTO login(MemberDTO mdto);
+	void execute(HttpServletRequest request, HttpServletResponse response, String action);
 }
