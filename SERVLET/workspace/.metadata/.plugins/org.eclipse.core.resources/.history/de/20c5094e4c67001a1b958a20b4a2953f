@@ -1,0 +1,8 @@
+package orm;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+
+public class DBBuilder {
+	private static SqlSessionFactory factory;
+	
+}

@@ -1,5 +1,8 @@
 package service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,8 +52,22 @@ public class MemberServiceImpl implements MemberService {
 			} else {
 				log.info("login fail");
 			}
+		} else if(action.equals("isExistEmail")) {
+			String email =  request.getParameter("email");
+			int isExist = checkEmail(email);
+			
+			if(isExist > 0) {log.info("is exist email");
+			try {
+				PrintWriter out = response.getWriter();
+				out.print(isExist);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
+			else log.info("is able to signup");
 		}
 	}
+
 
 	@Override
 	public boolean regist(MemberDTO mdto) {
@@ -71,6 +88,11 @@ public class MemberServiceImpl implements MemberService {
 		else
 			return null;
 
+	}
+
+	@Override
+	public int checkEmail(String email) {
+		return mdao.checkEmail(email);
 	}
 
 }

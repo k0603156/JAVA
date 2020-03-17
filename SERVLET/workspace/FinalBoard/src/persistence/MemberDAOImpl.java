@@ -29,4 +29,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO login(MemberDTO mdto) {
 		return sql.selectOne(namespace+".mlogin", mdto);
 	}
+
+	@Override
+	public int checkEmail(String email) {
+		Integer flag =sql.selectOne(namespace+".checkEmail", email);
+		log.info("flag:", flag);
+		return flag;
+	}
 }

@@ -1,0 +1,10 @@
+package persistence;
+
+public interface MemberDAO {
+
+	boolean insert(MemberDTO mdto);
+
+	boolean login(MemberDTO mdto);
+
+
+}

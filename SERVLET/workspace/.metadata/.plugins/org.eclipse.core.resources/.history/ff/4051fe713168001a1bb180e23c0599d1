@@ -1,0 +1,47 @@
+package persistence;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class ProductDAOImpl implements ProductDAO {
+
+	private static Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
+
+	@Override
+	public void insert(ProductDTO pdto) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<ProductDTO> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductDTO getDetail(int pno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(ProductDTO pdto) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(int pno) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readCount(int pno) {
+		// TODO Auto-generated method stub
+
+	}
+}

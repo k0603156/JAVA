@@ -1,0 +1,53 @@
+package service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import persistence.MemberDAO;
+import persistence.MemberDAOImpl;
+import persistence.MemberDTO;
+
+public class MemberServiceImpl implements MemberService {
+
+	private static Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+	MemberDAO mdao;
+
+	public MemberServiceImpl() {
+		mdao = new MemberDAOImpl();
+	}
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response, String action) {
+		if (action.equals("signup")) {
+			String email = request.getParameter("email");
+			String nickname = request.getParameter("nickname");
+			String pwd = request.getParameter("pwd");
+			MemberDTO mdto = new MemberDTO(email, nickname, pwd);
+
+			boolean flag = regist(mdto);
+			if (flag) {
+				log.info("success");
+			} else {
+				log.info("fail");
+			}
+		}else if(action.equals("signin")) {
+			String email = request.getParameter("email");
+			String pwd = request.getParameter("pwd");
+			MemberDTO mdto = new MemberDTO(email, pwd);
+		}
+	}
+
+	@Override
+	public boolean regist(MemberDTO mdto) {
+		boolean flag = mdao.insert(mdto);
+
+		if (flag)
+			return true;
+		else
+			return false;
+	}
+
+}

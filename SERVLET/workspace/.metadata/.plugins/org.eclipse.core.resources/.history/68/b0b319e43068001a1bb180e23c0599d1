@@ -1,0 +1,7 @@
+package persistence;
+
+public interface ProductDAO {
+
+	void insert(ProductDTO pdto);
+
+	}

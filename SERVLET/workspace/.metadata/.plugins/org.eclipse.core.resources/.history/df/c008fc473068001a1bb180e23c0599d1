@@ -1,0 +1,15 @@
+package persistence;
+
+import java.util.Date;
+
+public class ProductDTO {
+	private int pno;
+	private String category;
+	private String pname;
+	private String pcontent;
+	private String pwriter;
+	private int readcount;
+	private Date regdate;
+	private Date moddate;
+	private String imgfile;
+}

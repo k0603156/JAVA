@@ -1,1 +1,1 @@
-[[{"location":"C:\\Program Files\\Java\\jre1.8.0_211","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
+[[{"location":"C:\\_jsp\\apache-tomcat-8.5.51\\lib\\servlet-api.jar","type":"JAR","hints":{}},"ABSENT"],[{"location":"C:\\_jsp\\workspace\\FinalBoard","type":"PROJECT","hints":{"PROJECT_NAME":"FinalBoard"}},"ABSENT"],[{"location":"C:\\Program Files\\Java\\jre1.8.0_211","type":"JRE","hints":{}},"jre:jre:1.8.0"],[{"location":"C:\\_jsp\\workspace\\FinalBoard\\WebContent\\WEB-INF\\lib\\mybatis-3.5.0.jar","type":"JAR","hints":{}},"org.mybatis.mybatis:org.mybatis.mybatis:3.5.0"]]

@@ -1,0 +1,19 @@
+package orm;
+
+import java.io.IOException;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+public class DBBuilder {
+	private static SqlSessionFactory factory;
+	static {
+		try {
+			factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader("orm/MybatisConfig.xml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

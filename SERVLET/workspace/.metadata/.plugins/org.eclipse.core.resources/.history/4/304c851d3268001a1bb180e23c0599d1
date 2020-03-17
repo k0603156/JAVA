@@ -1,0 +1,13 @@
+package service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import persistence.ProductDTO;
+
+public interface ProductService {
+	boolean create(ProductDTO pdto);
+	MemberDTO login(MemberDTO mdto);
+	int checkEmail(String email);
+	void execute(HttpServletRequest request, HttpServletResponse response, String action);
+}

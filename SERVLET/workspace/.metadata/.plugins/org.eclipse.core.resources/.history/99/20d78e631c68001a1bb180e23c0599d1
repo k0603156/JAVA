@@ -1,0 +1,131 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+	<c:set var="s_email" 	value="${email }	" scope="session"/>
+	<c:set var="s_nickname" value="${nickname } " scope="session"/>
+	<c:set var="s_grade" 	value="${grade }	" scope="session"/>
+    <!-- *** TOPBAR ***
+ _________________________________________________________ -->
+    <div id="top">
+    <!-- sign=TRUE -->
+    <c:choose>
+    <c:when test="${s_email ne null && s_email ne ''}">
+        <div class="container">
+            <div class="col-md-6 offer" data-animate="fadeInDown">
+                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
+            </div>
+            <div class="col-md-6" data-animate="fadeInDown">
+                <ul class="menu" style="color:white">
+                    <li>${s_email }</li>
+                    <li>${s_nickname }</li>
+                    <li>
+                    	<c:choose>
+                    		<c:when test="${s_grade eq '0' }">
+                    			일반
+                    		</c:when>
+                 		  	<c:when test="${s_grade eq '5' }">
+                    			우수
+                    		</c:when>
+                    		<c:when test="${s_grade eq '10' }">
+                    			골드
+                    		</c:when>
+                    		<c:when test="${s_grade eq '50' }">
+                    			VIP
+                    		</c:when>
+                    		<c:when test="${s_grade eq '99' }">
+                    			관리자
+                    		</c:when>
+                    	</c:choose>
+                    </li>
+                    <li><a href="./member?action=logout">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       </c:when>
+      <c:otherwise>
+        <div class="container">
+            <div class="col-md-6 offer" data-animate="fadeInDown">
+                <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
+            </div>
+            <div class="col-md-6" data-animate="fadeInDown">
+                <ul class="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#login-modal">SignIn</a>
+                    </li>
+                   <li><a href="#" data-toggle="modal" data-target="#register-modal">Regist</a>
+                    </li>
+                    <li><a href="contact.html">Contact</a>
+                    </li>
+                    <li><a href="#">Recently viewed</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       </c:otherwise>
+       </c:choose>
+	        <!-- sign=FALSE -->
+	        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+	            <div class="modal-dialog modal-sm">
+	
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                        <h4 class="modal-title" id="Login">Customer SignIn</h4>
+	                    </div>
+	                    <div class="modal-body">
+	                        <form action="./member" method="post">
+	                           	<input type="hidden" class="form-control" value="signin" name="action" >
+	                            <div class="form-group">
+	                                <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
+	                            </div>
+	                            <div class="form-group">
+	                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="pwd">
+	                            </div>
+	
+	                            <p class="text-center">
+	                                <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in"></i> Sign In</button>
+	                            </p>
+	
+	                        </form>
+	
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+        <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="Regist" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="Regist">Customer registration</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="./member" method="post">
+                          	<input type="hidden" class="form-control" value="signup" name="action" >
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="email-modal" placeholder="email" name="email">
+                            </div>         
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nickname-modal" placeholder="nickname" name="nickname">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password-modal" placeholder="password" name="pwd">
+                            </div>
+
+                            <p class="text-center">
+                                <button class="btn btn-primary"  type="submit"><i class="fa fa-sign-in"></i> Sign Up</button>
+                            </p>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- *** TOP BAR END *** -->
+

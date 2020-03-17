@@ -1,0 +1,10 @@
+package persistence;
+
+public interface ProductDAO {
+
+	void insert(ProductDTO pdto);
+
+	MemberDTO login(MemberDTO mdto);
+	
+	int checkEmail(String email);
+}
