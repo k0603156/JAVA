@@ -21,22 +21,23 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public void insert(ProductDTO pdto) {
-
+		sql.insert(namespace+".padd", pdto);
+		sql.commit();
 	}
 
 	@Override
 	public List<ProductDTO> getList() {
-		return null;
+		return sql.selectList(namespace+".plist");
 	}
 
 	@Override
 	public ProductDTO getDetail(int pno) {
-		return null;
+		return sql.selectOne(namespace+".pdetail", pno);
 	}
 
 	@Override
 	public void update(ProductDTO pdto) {
-
+		sql.update(namespace+".pupdate", pdto);
 	}
 
 	@Override

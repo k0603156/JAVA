@@ -10,7 +10,7 @@ import persistence.ProductDTO;
 public interface ProductService {
 	void create(ProductDTO pdto);
 	List<ProductDTO> getList();
-	ProductDTO getDetail();
+	ProductDTO getDetail(int pno);
 	void modify(ProductDTO pdtp);
 	void remove(int pno);
 	void readCount(int pno);

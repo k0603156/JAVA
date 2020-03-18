@@ -16,6 +16,15 @@ public class ProductDTO {
 	public ProductDTO() {
 		super();
 	}
+	public ProductDTO(int pno, String category, String pname, String pcontent, String pwriter, String imgfile) {
+		super();
+		this.pno = pno;
+		this.category = category;
+		this.pname = pname;
+		this.pcontent = pcontent;
+		this.pwriter = pwriter;
+		this.imgfile = imgfile;
+	}
 	public ProductDTO(String category, String pname, String pcontent, String pwriter, String imgfile) {
 		super();
 		this.category = category;

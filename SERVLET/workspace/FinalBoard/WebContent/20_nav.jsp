@@ -43,7 +43,7 @@
                                         <div class="col-sm-3">
                                             <h5>Clothing</h5>
                                             <ul>
-                                                <li><a href="category.html">T-shirts</a>
+                                                <li><a href="./product?action=pList">ProductList</a>
                                                 </li>
                                                 <li><a href="category.html">Shirts</a>
                                                 </li>
@@ -171,12 +171,12 @@
                                         <div class="col-sm-3">
                                             <div class="banner">
                                                 <a href="#">
-                                                    <img src="img/banner.jpg" class="img img-responsive" alt="">
+                                                    <img src="resources/img/banner.jpg" class="img img-responsive" alt="">
                                                 </a>
                                             </div>
                                             <div class="banner">
                                                 <a href="#">
-                                                    <img src="img/banner2.jpg" class="img img-responsive" alt="">
+                                                    <img src="resources/img/banner2.jpg" class="img img-responsive" alt="">
                                                 </a>
                                             </div>
                                         </div>

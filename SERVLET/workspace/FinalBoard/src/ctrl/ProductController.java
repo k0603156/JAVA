@@ -1,6 +1,8 @@
 package ctrl;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,12 +27,30 @@ public class ProductController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		if(action.equals("")) {
+		if(action.equals("pList")) {
 			service.execute(request, response, action);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("index.jsp?pg=pList");
+			dispatcher.forward(request,response);
 			
-		}else if(action.equals("")) {
+		}else if(action.equals("pWrite")) {
 			service.execute(request, response, action);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("product?action=pList");
+			dispatcher.forward(request,response);
 			
+		}else if(action.equals("pDetail")) {
+			service.execute(request, response, action);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("index.jsp?pg=pDetail");
+			dispatcher.forward(request,response);
+			
+		}else if(action.equals("pModify")) {
+			service.execute(request, response, action);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("index.jsp?pg=pModify");
+			dispatcher.forward(request,response);
+		}
+		else if(action.equals("pModifySave")) {
+			service.execute(request, response, action);
+			RequestDispatcher dispatcher =request.getRequestDispatcher("product?action=pDetail");
+			dispatcher.forward(request,response);
 		}
 	}
 
