@@ -27,16 +27,16 @@
 										<div class="flipper">
 											<div class="front">
 												<a href="./product?action=pDetail&pno=${pdto.pno }"> <img
-													src="resources/img/product1.jpg" alt=""
+													src="upload/${pdto.imgfile }" alt=""
 													class="img-responsive">
 												</a>
 											</div>
-											<div class="back">
+								<%-- 			<div class="back">
 												<a href="./product?action=pDetail&pno=${pdto.pno }"> <img
 													src="resources/img/product1_2.jpg" alt=""
 													class="img-responsive">
 												</a>
-											</div>
+											</div> --%>
 										</div>
 									</div>
 									<a href="detail.html" class="invisible"> <img

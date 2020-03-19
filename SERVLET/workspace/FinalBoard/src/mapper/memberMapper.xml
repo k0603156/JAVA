@@ -12,5 +12,12 @@
 	<select id="checkEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
 	select count(email) from tbl_member where email=#{email}
 	</select>
+	<select id="mlist" resultType="persistence.MemberDTO">
+	select email, nickname from tbl_member;
+	</select>
+	<delete id="mdestory" parameterType="java.lang.String">
+		delete from tbl_member where email=#{email}
+	</delete>
+	
 </mapper>
 

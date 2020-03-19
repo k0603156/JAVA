@@ -7,7 +7,7 @@
 			<div class="col-md-12">
 
 				<div class="row" id="productMain">
-					<div class="col-sm-6">
+					<div class="col-sm-3">
 						<div id="mainImage">
 							<img src="img/detailbig1.jpg" alt="" class="img-responsive">
 						</div>
@@ -29,7 +29,7 @@
 						<!-- /.ribbon -->
 
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-9">
 						<div class="box">
 							<h1 class="text-center">${pdto.pname }</h1>
 							<p class="goToDescription">
@@ -47,7 +47,7 @@
 
 						<div class="row" id="thumbs">
 							<div class="col-xs-4">
-								<a href="img/detailbig1.jpg" class="thumb"> <img
+								<a href="upload/${pdto.imgfile }" class="thumb"> <img
 									src="img/detailsquare.jpg" alt="" class="img-responsive">
 								</a>
 							</div>

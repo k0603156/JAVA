@@ -53,6 +53,14 @@ public class MemberController extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else if (action.equals("isExistEmail")) {
 			service.execute(request, response, action);
+		} else if (action.equals("getUserList")) {
+			service.execute(request, response, action);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp?pg=admin");
+			dispatcher.forward(request, response);
+		}else if (action.equals("deleteUser")) {
+			service.execute(request, response, action);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("member?action=getUserList");
+			dispatcher.forward(request, response);
 		}
 	}
 

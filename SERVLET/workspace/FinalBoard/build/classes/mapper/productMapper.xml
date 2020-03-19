@@ -5,11 +5,11 @@
 <mapper namespace="mapper.productMapper">
 	<insert id="padd" parameterType="persistence.ProductDTO">
 		insert into
-		tbl_product(category, pname, pcontent, pwriter, readcount, regdate, moddate)
-		values (#{category}, #{pname}, #{pcontent}, #{pwriter}, 0, now(), now())
+		tbl_product(category, pname, pcontent, pwriter, readcount, regdate, moddate, imgfile)
+		values (#{category}, #{pname}, #{pcontent}, #{pwriter}, 0, now(), now(), #{imgfile})
 	</insert>
 	<select id="plist" resultType="persistence.ProductDTO">
-	 select pno, pname, regdate, pwriter from tbl_product order by pno desc
+	 select pno, pname, regdate, pwriter, imgfile from tbl_product order by pno desc
 	</select>
 	<select id="pdetail" parameterType="java.lang.Integer" resultType="persistence.ProductDTO">
 		select * from tbl_product where pno=#{pno}
@@ -18,6 +18,6 @@
 		update tbl_product set category=#{category}, pname=#{pname}, pcontent=#{pcontent}, pwriter=#{pwriter}, moddate=now()
 		where pno=#{pno}
 	</update>
-	
+
 </mapper>
 

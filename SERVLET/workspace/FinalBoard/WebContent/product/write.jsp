@@ -9,9 +9,9 @@
 			<div class="col-md-12">
 				<div class="box">
 					<h3>Product Regist</h3>
-					<form action="./product" method="post">
+					<form action="./product?action=pWrite" method="post" enctype="multipart/form-data">
 
-						<input type="hidden" name="action" value="pWrite" />
+						<!-- <input type="hidden" name="action" value="pWrite" /> -->
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">

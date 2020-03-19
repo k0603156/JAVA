@@ -2,6 +2,7 @@ package service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ public class MemberServiceImpl implements MemberService {
 
 	private static Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
 	MemberDAO mdao;
+	List<MemberDTO> mList;
 
 	public MemberServiceImpl() {
 		mdao = new MemberDAOImpl();
@@ -66,6 +68,20 @@ public class MemberServiceImpl implements MemberService {
 			}
 			else log.info("is able to signup");
 		}
+		 else if(action.equals("getUserList")) {
+				mList = getList();
+				request.setAttribute("objList", mList);
+		}
+		 else if(action.equals("deleteUser")) {
+				String email =  request.getParameter("email");
+				int flag = deleteUser(email);
+
+		}
+			
+		
+		
+		
+		
 	}
 
 
@@ -93,6 +109,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int checkEmail(String email) {
 		return mdao.checkEmail(email);
+	}
+
+	@Override
+	public List<MemberDTO> getList() {
+		return mdao.getList();
+	}
+
+	@Override
+	public int deleteUser(String email) {
+		return mdao.destory(email);
 	}
 
 }

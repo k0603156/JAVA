@@ -1,12 +1,18 @@
 package service;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import persistence.ProductDAO;
 import persistence.ProductDAOImpl;
@@ -25,12 +31,34 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response, String action) {
 		if(action.equals("pWrite")){
-			String category = request.getParameter("category");
-			String pname = request.getParameter("pname");
-			String pwriter = request.getParameter("pwriter");
-			String pcontent = request.getParameter("pcontent");
-			ProductDTO pdto = new ProductDTO(category, pname, pcontent, pwriter, null);
-			create(pdto);
+			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			if(isMultipart) {
+				ServletContext context = request.getServletContext();
+				log.info(""+context);
+				String saveDir = context.getRealPath("upload");
+				log.info(saveDir);
+				int maxSize = 2*1024*1024;
+				String encoding="UTF-8";
+				
+				MultipartRequest multi;
+				try {
+					multi = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
+					String category = multi.getParameter("category");
+					String pname = multi.getParameter("pname");
+					String pwriter = multi.getParameter("pwriter");
+					String pcontent = multi.getParameter("pcontent");
+					String imgfile = multi.getFilesystemName("imgfile");
+					
+					ProductDTO pdto = new ProductDTO(category, pname, pcontent, pwriter, imgfile);		
+					create(pdto);
+				
+				} catch (IOException e) {
+					log.info(">> Multipart fail");
+					e.printStackTrace();
+				}
+
+			}
+	
 		}
 		else if(action.equals("pList")) {
 			pList = getList();

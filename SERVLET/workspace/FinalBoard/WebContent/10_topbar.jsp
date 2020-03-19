@@ -17,7 +17,16 @@
             </div>
             <div class="col-md-6" data-animate="fadeInDown">
                 <ul class="menu" style="color:white">
-                    <li>${s_email }</li>
+                    <li>
+                    <c:choose>
+                    	<c:when test="${s_grade eq '99' }">
+                    		<a href="./member?action=getUserList">${s_email }</a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		${s_email }
+                    	</c:otherwise>
+                    </c:choose>
+                    </li>
                     <li>${s_nickname }</li>
                     <li>
                     	<c:choose>
