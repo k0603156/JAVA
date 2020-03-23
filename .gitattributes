@@ -2,6 +2,8 @@ SERVLET/workspace/.metadata/**/* linguist-vendored
 SERVLET/workspace/FinalBoard/WebContent/resources/* linguist-vendored
 SERVLET/workspace/FinalBoard/WebContent/_doc/* linguist-vendored
 
+*/*.js  linguist-vendored
+
 */*.java          text diff=java
 
 */*.jsp           text
