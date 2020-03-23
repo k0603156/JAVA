@@ -1,4 +1,4 @@
-SERVLET/workspace/.metadata/.plugins/* linguist-vendored
+SERVLET/workspace/.metadata/**/* linguist-vendored
 SERVLET/workspace/FinalBoard/WebContent/resources/* linguist-vendored
 SERVLET/workspace/FinalBoard/WebContent/_doc/* linguist-vendored
 
