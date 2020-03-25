@@ -20,7 +20,7 @@
     		)
     	</insert>
     	<select id="list" resultType="pvo">
-    		select pno,title,writer,redcount,modd8
+    		select pno,title,writer,readcount,modd8
     		from tbl_product order by pno desc
     	</select>
     	<select id="detail" parameterType="java.lang.Integer" resultType="pvo">
