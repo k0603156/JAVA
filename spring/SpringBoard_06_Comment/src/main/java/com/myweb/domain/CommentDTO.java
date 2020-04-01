@@ -4,7 +4,6 @@ import java.util.List;
 
 public class CommentDTO {
 
-
 	private int commentcnt;
 	private List<CommentVO> list;
 	

@@ -57,6 +57,7 @@
 		</td>
 	</tr>
 </table>
+
 <form action="/product/remove" method="post" id="rmForm">
 	<input type="hidden" name="pno" value="${pvo.pno }">
 	<input type="hidden" name="imgfile" value="${pvo.imgfile }">
@@ -65,11 +66,40 @@
 	<input type="hidden" name="type" value="<c:out value='${cri.type }' />">
 	<input type="hidden" name="keyword" value="<c:out value='${cri.keyword }' />">
 </form>
+<form>
+  <div class="input-group mb-3 input-group-lg">
+    <div class="input-group-prepend">
+      <span class="input-group-text">${pvo.writer }</span>
+    </div>
+    <input type="text" class="form-control" id="input-cmt">
+      <div class="input-group-append">
+    <button class="btn btn-success" id="submit-cmt" type="button">댓글 전송</button>
+  </div>
+  </div>
+</form>
+<ul id="list-cmt-ul" class="list-group list-group-flush">
+  <li class="list-group-item">First item</li>
+</ul>
+
+<ul id="pagination-cmt" class="pagination pagination-sm  justify-content-center">
+  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+  <li class="page-item"><a class="page-link" href="#">1</a></li>
+  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+</ul>
+<script src="/resources/js/comment.js"></script>
 <script>
 	$(function() {
+		var pno = '<c:out value="${pvo.pno}"/>';
+		var writer ='<c:out value="${pvo.writer}"/>';
+		listComment(pno,1);
 		$(document).on("click", "#rmBtn", function() {
 			$("#rmForm").submit();
 		});
+
+		$(document).on("click", "#submit-cmt",{
+			pno:pno,
+			writer:writer
+		}, addComment)
 	});
 	let result = '<c:out value="${result}" />';
 	if (result == 'modify_ok') {
