@@ -1,12 +1,14 @@
+var commentWrapper,commentBtn, modVal;
+var commentCno;
 function addComment(params){
-	let pno =params.data.pno;
-	let writer =params.data.writer;
-	let content =$("#input-cmt").val();
+	var pno =params.data.pno;
+	var writer =params.data.writer;
+	var content =$("#input-cmt").val();
 	if(content==""&&content==null){
 		alert("내용을 입력해주세요");
 		return false;
 	}else{
-		let cmtData ={pno:pno, writer:writer, content:content};
+		var cmtData ={pno:pno, writer:writer, content:content};
 		$.ajax({
 			type:"post",
 			url:"/comment/new",
@@ -25,7 +27,7 @@ function addComment(params){
 }
 
 function listComment(pno, page){
-	let pageNo = page >1 ? page:1;
+	var pageNo = page >1 ? page:1;
 	$.getJSON("/comment/p/"+pno+"/"+pageNo+".json", function(result){
 		printList(result, pageNo)
 	}).fail(function(){
@@ -41,7 +43,7 @@ function printList(result,pageNo){
 	var cmtStr="";
 	 for(var i =0; i< result.list.length; i++){
 
-		 cmtStr += "<li class='list-group-item d-flex justify-content-between'>";
+		 cmtStr += "<li class='list-group-item d-flex justify-content-between' data-cno='"+result.list[i].cno+"'>";
 		 cmtStr += "<span class='badge badge-secondary'>"+result.list[i].writer+"</span>";
 		 cmtStr += "<span class='cmtText'>"+result.list[i].content+"</span>";
 		 cmtStr += "<span class='badge badge-light'>"+formatTime(result.list[i].modd8)+"</span>";
@@ -50,10 +52,68 @@ function printList(result,pageNo){
 		 cmtStr += "</li>";
 	 }
 	 cmtListULTag.html(cmtStr).trigger("create");
+	 printListPaging(result.commentcnt,pageNo);
+}
+function printListPaging(cmtTotal, page){
+	var cmtPagination =$('#pagination-cmt');
+	var pagingStr ="";
+	var pageNum =page;
+	var endPage =Math.ceil(pageNum/10)*10;
+	var startPage =endPage -9;
+	var prev = startPage != 1;
+	var next =false;
 	
+	if(endPage*10 >cmtTotal){
+		endPage =Math.ceil(cmtTotal/10);
+	}else{
+		next=true;
+	}
+	
+	if(prev){
+		pagingStr+='<li class="page-item"><a class="page-link" href="'
+			+(startPage-1)
+			+'">Prev</a></li>';
+	}for(var i =startPage; i<=endPage; i++){
+		var clsActive = pageNum ==i?'active':'';
+		pagingStr+='<li class="page-item '
+			+clsActive
+			+'"><a class="page-link">'
+			+i
+			+'</a></li>';
+	}
+	if(next){
+		pagingStr+='<li class="page-item"><a class="page-link" href="'
+			+(endPage+1)
+			+'">Next</a></li>';
+	}
+	cmtPagination.html(pagingStr).trigger("create");
 }
 function formatTime(modd8){
 	var distTime=modd8- new Date().getTime();
-//	return new Date(modd8).toLocaleDateString(undefined,{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-	return -Math.floor(distTime/1000)+'초 전';
+	return new Date(modd8).toLocaleDateString(undefined,{ weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+//	return -Math.floor(distTime/1000)+'초 전';
+}
+
+function modifyComment(modVal,cno){
+	var cno = cno;
+	var cmtText = modVal;
+	$.ajax({
+		url:"/comment/"+cno,
+		type:"put",
+		data:JSON.stringify({
+			cno:cno,
+			content:cmtText
+		}),
+		contentType: "application/json; charset=utf-8"
+	}).done(function(response){
+		alert(response);
+		changeComment();
+	}).fail(function(){
+		alert("수정 실패");
+	});	
+}
+function changeComment(){
+	commentWrapper.find("#modInput").remove();
+	commentWrapper.find(".cmtText").text(modVal);
+	commentWrapper.find(".badge-light").after(commentBtn);
 }
